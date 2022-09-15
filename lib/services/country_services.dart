@@ -4,8 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:your_ip/models/country_model.dart';
 
 class CountryServices {
-  Future<CountryModel> getCountryInfo() async {
-    Uri url = Uri.parse('https://restcountries.com/v3.1/alpha/sy');
+  Future<CountryModel> getCountryInfo(String cc) async {
+    Uri url = Uri.parse('https://restcountries.com/v3.1/alpha/$cc');
     http.Response response = await http.get(url);
 
     if (response.statusCode == 400) {

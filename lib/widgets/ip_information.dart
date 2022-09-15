@@ -9,14 +9,14 @@ import 'package:your_ip/models/ip_model.dart';
 import 'package:your_ip/services/theme_services.dart';
 
 class IPInformation extends StatefulWidget {
-  const IPInformation({Key? key}) : super(key: key);
+  IPInformation({Key? key, required this.ipModelData}) : super(key: key);
+  IpModel ipModelData;
 
   @override
   State<IPInformation> createState() => _IPInformationState();
 }
 
 class _IPInformationState extends State<IPInformation> {
-  IpModel? ipModelData;
   CountryModel? countryModel;
 
   @override
@@ -43,7 +43,7 @@ class _IPInformationState extends State<IPInformation> {
                 ),
               ),
               Text(
-                BlocProvider.of<IPCubit>(context).ipModel!.ip,
+                widget.ipModelData.ip,
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -93,9 +93,7 @@ class _IPInformationState extends State<IPInformation> {
                                   color: Colors.red,
                                 ),
                                 Text(
-                                  BlocProvider.of<CountryCubit>(context)
-                                      .countryModel!
-                                      .nativeNameEn,
+                                  countryModel!.nativeNameEn,
                                   style: TextStyle(
                                       color: Provider.of<ThemeServices>(context)
                                                   .mode ==
@@ -120,10 +118,7 @@ class _IPInformationState extends State<IPInformation> {
                                 child: SizedBox.fromSize(
                                   size: const Size.fromRadius(48),
                                   // Image radius
-                                  child: Image.network(
-                                      BlocProvider.of<CountryCubit>(context)
-                                          .countryModel!
-                                          .flag,
+                                  child: Image.network(countryModel!.flag,
                                       fit: BoxFit.cover),
                                 ),
                               ),
@@ -141,9 +136,7 @@ class _IPInformationState extends State<IPInformation> {
                               fontSize: 16),
                         ),
                         Text(
-                          BlocProvider.of<CountryCubit>(context)
-                              .countryModel!
-                              .countryName,
+                          countryModel!.countryName,
                           style: TextStyle(
                               color: Provider.of<ThemeServices>(context).mode ==
                                       ThemeMode.light
@@ -163,9 +156,7 @@ class _IPInformationState extends State<IPInformation> {
                               fontSize: 16),
                         ),
                         Text(
-                          BlocProvider.of<CountryCubit>(context)
-                              .countryModel!
-                              .capital,
+                          countryModel!.capital,
                           style: TextStyle(
                               color: Provider.of<ThemeServices>(context).mode ==
                                       ThemeMode.light
@@ -185,9 +176,7 @@ class _IPInformationState extends State<IPInformation> {
                               fontSize: 16),
                         ),
                         Text(
-                          BlocProvider.of<CountryCubit>(context)
-                              .countryModel!
-                              .nativeNameAr,
+                          countryModel!.nativeNameAr,
                           style: TextStyle(
                               color: Provider.of<ThemeServices>(context).mode ==
                                       ThemeMode.light

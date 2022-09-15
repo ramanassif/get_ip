@@ -16,7 +16,7 @@ class CountryModel {
   factory CountryModel.fromJson(dynamic data) {
     return CountryModel(
       nativeNameEn: data[0]['name']['common'],
-      nativeNameAr: data[0]['name']['nativeName']['ara']['common'],
+      nativeNameAr: data[0]['name']['nativeName'].values.first['common'],
       flag: data[0]['flags']['png'],
       countryName: data[0]['name']['official'],
       capital: data[0]['capital'][0],

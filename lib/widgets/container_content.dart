@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:your_ip/cubits/country_cubit/country_cubit.dart';
 import 'package:your_ip/cubits/ip_cubit/ip_cubit.dart';
 import 'package:your_ip/cubits/ip_cubit/ip_state.dart';
 import 'package:your_ip/models/country_model.dart';
@@ -26,8 +27,9 @@ class _IPContainerState extends State<IPContainer> {
             child: CircularProgressIndicator(),
           );
         } else if (state is IPSuccess) {
-          ipModelData = BlocProvider.of<IPCubit>(context).ipModel;
-          return const IPInformation();
+          ipModelData = state.ipModel;
+          BlocProvider.of<CountryCubit>(context).getCountryInfo(ipModelData!.cc);
+          return IPInformation(ipModelData: ipModelData!,);
         } else if (state is IPFailure) {
           return const Center(
             child: Text('Something went wrong, Please try again'),

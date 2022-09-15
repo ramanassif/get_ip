@@ -37,7 +37,6 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {
             Navigator.pushNamed(context, GetYourIPPage.routeName);
             BlocProvider.of<IPCubit>(context).getIp();
-            BlocProvider.of<CountryCubit>(context).getCountryInfo();
           },
           style: ElevatedButton.styleFrom(
               primary: Colors.red,
