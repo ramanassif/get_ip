@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:your_ip/cubits/country_cubit/country_cubit.dart';
-import 'package:your_ip/cubits/ip_cubit/ip_cubit.dart';
-import 'package:your_ip/cubits/ip_cubit/ip_state.dart';
-import 'package:your_ip/models/country_model.dart';
-import 'package:your_ip/models/ip_model.dart';
-import 'package:your_ip/widgets/ip_information.dart';
+import 'package:your_ip/features/get_ip/blocs/country_bloc/country_bloc.dart';
+import 'package:your_ip/features/get_ip/blocs/ip_bloc/ip_bloc.dart';
+import 'package:your_ip/features/get_ip/models/country_model.dart';
+import 'package:your_ip/features/get_ip/models/ip_model.dart';
+import 'package:your_ip/features/get_ip/views/widgets/ip_information.dart';
+
 
 class IPContainer extends StatefulWidget {
   const IPContainer({Key? key}) : super(key: key);
@@ -22,15 +21,15 @@ class _IPContainerState extends State<IPContainer> {
   @override
   Widget build(BuildContext context) {
     return BlocListener(
-      bloc: BlocProvider.of<IPCubit>(context),
+      bloc: BlocProvider.of<IpBloc>(context),
       listener: (context, state) {
         if(state is IPSuccess)
           {
             ipModelData = state.ipModel;
-            BlocProvider.of<CountryCubit>(context).getCountryInfo(ipModelData!.cc);
+            BlocProvider.of<CountryBloc>(context).getCountryInfo(ipModelData!.cc);
           }
       },
-      child: BlocBuilder<IPCubit, IPState>(
+      child: BlocBuilder<IpBloc, IpState>(
         builder: (context, state) {
           if (state is IPLoading) {
             return const Center(

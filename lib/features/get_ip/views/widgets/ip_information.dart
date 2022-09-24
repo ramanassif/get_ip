@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:your_ip/cubits/country_cubit/country_cubit.dart';
-import 'package:your_ip/cubits/country_cubit/country_state.dart';
-import 'package:your_ip/models/country_model.dart';
-import 'package:your_ip/models/ip_model.dart';
-import 'package:your_ip/services/theme_services.dart';
+import 'package:your_ip/core/theme/theme_services.dart';
+import 'package:your_ip/features/get_ip/blocs/country_bloc/country_bloc.dart';
+import 'package:your_ip/features/get_ip/models/country_model.dart';
+import 'package:your_ip/features/get_ip/models/ip_model.dart';
 
 class IPInformation extends StatefulWidget {
   IPInformation({Key? key, required this.ipModelData}) : super(key: key);
@@ -69,7 +68,7 @@ class _IPInformationState extends State<IPInformation> {
                 topRight: Radius.circular(50),
               ),
             ),
-            child: BlocBuilder<CountryCubit, CountryState>(
+            child: BlocBuilder<CountryBloc, CountryState>(
               builder: (context, state) {
                 if (state is CountryLoading) {
                   return const Center(
@@ -77,7 +76,7 @@ class _IPInformationState extends State<IPInformation> {
                   );
                 } else if (state is CountrySuccess) {
                   countryModel =
-                      BlocProvider.of<CountryCubit>(context).countryModel;
+                      BlocProvider.of<CountryBloc>(context).countryModel;
                   return SizedBox(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
