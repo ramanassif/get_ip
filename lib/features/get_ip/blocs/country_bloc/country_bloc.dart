@@ -8,19 +8,21 @@ part 'country_event.dart';
 part 'country_state.dart';
 
 class CountryBloc extends Bloc<CountryEvent, CountryState> {
-  CountryBloc(this.countryServices) : super(CountryInitial());
-  CountryServices countryServices;
+  CountryBloc() : super(CountryInitial());
   CountryModel? countryModel;
   IpModel? ipModel;
 
-  void getCountryInfo(String cc) async {
-    emit(CountryLoading());
-    try {
-      countryModel = await countryServices.getCountryInfo(cc);
-      emit(CountrySuccess(countryModel: countryModel!));
-    } on Exception catch (e) {
-      print(e);
-      emit(CountryFailure());
+  @override
+  Stream<CountryState> mapEventToState(CountryEvent event) async* {
+    if (event is GetCountryInformation) {
+      yield CountryLoading();
+      try {
+        countryModel = await event.countryServices.getCountryInfo(event.cc);
+        yield (CountrySuccess(countryModel: countryModel!));
+      } on Exception catch (e) {
+        print(e);
+        yield (CountryFailure());
+      }
     }
   }
 }

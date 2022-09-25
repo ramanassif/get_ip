@@ -5,18 +5,21 @@ part 'ip_event.dart';
 part 'ip_state.dart';
 
 class IpBloc extends Bloc<IpEvent, IpState> {
-  IpBloc(this.ipServices) : super(IPInitial());
-  IPServices ipServices;
+  IpBloc() : super(IPInitial());
   IpModel? ipModel;
 
-  void getIp() async {
-    emit(IPLoading());
-    try {
-      ipModel = await ipServices.getIp();
-      emit(IPSuccess(ipModel: ipModel!));
-    } on Exception catch (e) {
-      print(e);
-      emit(IPFailure());
+  @override
+  Stream<IpState> mapEventToState(IpEvent event) async*{
+    if(event is GetIp){
+      yield IPLoading();
+      try {
+        ipModel = await event.ipServices.getIp();
+        yield(IPSuccess(ipModel: ipModel!));
+      } on Exception catch (e) {
+        print(e);
+        yield(IPFailure());
+      }
     }
   }
+
 }

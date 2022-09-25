@@ -4,8 +4,8 @@ import 'package:your_ip/features/get_ip/blocs/country_bloc/country_bloc.dart';
 import 'package:your_ip/features/get_ip/blocs/ip_bloc/ip_bloc.dart';
 import 'package:your_ip/features/get_ip/models/country_model.dart';
 import 'package:your_ip/features/get_ip/models/ip_model.dart';
+import 'package:your_ip/features/get_ip/repositories/country_services.dart';
 import 'package:your_ip/features/get_ip/views/widgets/ip_information.dart';
-
 
 class IPContainer extends StatefulWidget {
   const IPContainer({Key? key}) : super(key: key);
@@ -23,11 +23,12 @@ class _IPContainerState extends State<IPContainer> {
     return BlocListener(
       bloc: BlocProvider.of<IpBloc>(context),
       listener: (context, state) {
-        if(state is IPSuccess)
-          {
-            ipModelData = state.ipModel;
-            BlocProvider.of<CountryBloc>(context).getCountryInfo(ipModelData!.cc);
-          }
+        if (state is IPSuccess) {
+          ipModelData = state.ipModel;
+          BlocProvider.of<CountryBloc>(context).add(GetCountryInformation(
+              countryServices: CountryServices(), cc: ipModelData!.cc));
+          //BlocProvider.of<CountryBloc>(context).getCountryInfo(ipModelData!.cc);
+        }
       },
       child: BlocBuilder<IpBloc, IpState>(
         builder: (context, state) {
@@ -36,7 +37,9 @@ class _IPContainerState extends State<IPContainer> {
               child: CircularProgressIndicator(),
             );
           } else if (state is IPSuccess) {
-            return IPInformation(ipModelData: ipModelData!,);
+            return IPInformation(
+              ipModelData: ipModelData!,
+            );
           } else if (state is IPFailure) {
             return const Center(
               child: Text('Something went wrong, Please try again'),

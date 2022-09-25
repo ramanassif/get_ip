@@ -17,8 +17,6 @@ import 'package:your_ip/core/theme/theme.dart';
 import 'package:your_ip/core/theme/theme_services.dart';
 import 'package:your_ip/features/get_ip/blocs/country_bloc/country_bloc.dart';
 import 'package:your_ip/features/get_ip/blocs/ip_bloc/ip_bloc.dart';
-import 'package:your_ip/features/get_ip/repositories/country_services.dart';
-import 'package:your_ip/features/get_ip/repositories/ip_services.dart';
 import 'package:your_ip/features/get_ip/views/get_your_ip_page.dart';
 import 'package:your_ip/features/get_ip/views/home_page.dart';
 
@@ -27,12 +25,12 @@ void main() {
     providers: [
       BlocProvider<IpBloc>(
         create: (context) {
-          return IpBloc(IPServices());
+          return IpBloc();
         },
       ),
       BlocProvider<CountryBloc>(
         create: (context) {
-          return CountryBloc(CountryServices());
+          return CountryBloc();
         },
       ),
     ],

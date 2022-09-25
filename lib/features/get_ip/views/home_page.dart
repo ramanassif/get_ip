@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:your_ip/core/theme/theme_services.dart';
 import 'package:your_ip/features/get_ip/blocs/ip_bloc/ip_bloc.dart';
+import 'package:your_ip/features/get_ip/repositories/ip_services.dart';
 import 'package:your_ip/features/get_ip/views/get_your_ip_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -35,7 +36,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ElevatedButton(
           onPressed: () {
             Navigator.pushNamed(context, GetYourIPPage.routeName);
-            BlocProvider.of<IpBloc>(context).getIp();
+            BlocProvider.of<IpBloc>(context)
+                .add(GetIp(ipServices: IPServices()));
           },
           style: ElevatedButton.styleFrom(
               primary: Colors.red,
