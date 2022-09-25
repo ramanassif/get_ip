@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:your_ip/core/storage_services/storage_service.dart';
 import 'package:your_ip/features/get_ip/blocs/country_bloc/country_bloc.dart';
 import 'package:your_ip/features/get_ip/blocs/ip_bloc/ip_bloc.dart';
 import 'package:your_ip/features/get_ip/models/country_model.dart';
@@ -27,7 +28,6 @@ class _IPContainerState extends State<IPContainer> {
           ipModelData = state.ipModel;
           BlocProvider.of<CountryBloc>(context).add(GetCountryInformation(
               countryServices: CountryServices(), cc: ipModelData!.cc));
-          //BlocProvider.of<CountryBloc>(context).getCountryInfo(ipModelData!.cc);
         }
       },
       child: BlocBuilder<IpBloc, IpState>(
@@ -37,7 +37,7 @@ class _IPContainerState extends State<IPContainer> {
               child: CircularProgressIndicator(),
             );
           } else if (state is IPSuccess) {
-            return IPInformation(
+            return IpInformation(
               ipModelData: ipModelData!,
             );
           } else if (state is IPFailure) {

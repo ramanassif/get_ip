@@ -21,21 +21,7 @@ import 'package:your_ip/features/get_ip/views/get_your_ip_page.dart';
 import 'package:your_ip/features/get_ip/views/home_page.dart';
 
 void main() {
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider<IpBloc>(
-        create: (context) {
-          return IpBloc();
-        },
-      ),
-      BlocProvider<CountryBloc>(
-        create: (context) {
-          return CountryBloc();
-        },
-      ),
-    ],
-    child: const MyApp(),
-  ));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

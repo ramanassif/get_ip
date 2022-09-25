@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:your_ip/core/storage_services/storage_service.dart';
 import 'package:your_ip/core/theme/theme_services.dart';
 import 'package:your_ip/features/get_ip/blocs/country_bloc/country_bloc.dart';
 import 'package:your_ip/features/get_ip/models/country_model.dart';
 import 'package:your_ip/features/get_ip/models/ip_model.dart';
 
-class IPInformation extends StatefulWidget {
-  IPInformation({Key? key, required this.ipModelData}) : super(key: key);
+class IpInformation extends StatefulWidget {
+  IpInformation({Key? key, required this.ipModelData}) : super(key: key);
   IpModel ipModelData;
 
   @override
-  State<IPInformation> createState() => _IPInformationState();
+  State<IpInformation> createState() => _IpInformationState();
 }
 
-class _IPInformationState extends State<IPInformation> {
+class _IpInformationState extends State<IpInformation> {
   CountryModel? countryModel;
 
   @override
@@ -75,8 +76,10 @@ class _IPInformationState extends State<IPInformation> {
                     child: CircularProgressIndicator(),
                   );
                 } else if (state is CountrySuccess) {
-                  countryModel =
-                      BlocProvider.of<CountryBloc>(context).countryModel;
+                  countryModel = state.countryModel;
+                  StorageServices.write(
+                      'NativeNameEn', countryModel!.nativeNameEn);
+                  StorageServices.write('flag', countryModel!.flag);
                   return SizedBox(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

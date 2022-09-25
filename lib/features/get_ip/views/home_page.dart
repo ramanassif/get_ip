@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:your_ip/core/theme/theme_services.dart';
-import 'package:your_ip/features/get_ip/blocs/ip_bloc/ip_bloc.dart';
-import 'package:your_ip/features/get_ip/repositories/ip_services.dart';
 import 'package:your_ip/features/get_ip/views/get_your_ip_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -16,6 +13,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String? flagImg;
+  String? nativeName;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,20 +33,29 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, GetYourIPPage.routeName);
-            BlocProvider.of<IpBloc>(context)
-                .add(GetIp(ipServices: IPServices()));
-          },
-          style: ElevatedButton.styleFrom(
-              primary: Colors.red,
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-              textStyle:
-                  const TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
-          child: const Text('Get Your IP'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, GetYourIPPage.routeName);
+              },
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                  textStyle: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.w500)),
+              child: const Text('Get Your Current IP'),
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 }

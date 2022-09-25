@@ -4,9 +4,9 @@ import 'package:http/http.dart' as http;
 
 class ApiServices {
   final String baseUrl;
-  final bool i;
+  final bool isUTF8;
 
-  ApiServices({required this.baseUrl, required this.i});
+  ApiServices({required this.baseUrl, required this.isUTF8});
 
   Future getFromApi() async {
     Uri url = Uri.parse(baseUrl);
@@ -15,7 +15,7 @@ class ApiServices {
     if (response.statusCode == 400) {
       throw Exception('error');
     }
-    if (i) {
+    if (isUTF8) {
       List<dynamic> data = jsonDecode(utf8.decode(response.bodyBytes));
       return data;
     } else {
