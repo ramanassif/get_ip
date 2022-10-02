@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:your_ip/features/get_ip/models/country_model.dart';
-import 'package:your_ip/features/get_ip/models/ip_model.dart';
 import 'package:your_ip/features/get_ip/repositories/country_services.dart';
 
 part 'country_event.dart';

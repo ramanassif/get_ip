@@ -1,0 +1,198 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+import 'package:your_ip/core/theme/theme_services.dart';
+import 'package:your_ip/features/countries/blocs/countries_bloc.dart';
+import 'package:your_ip/features/countries/models/countries_model.dart';
+import 'package:your_ip/features/countries/repositories/countries_service.dart';
+import 'package:your_ip/features/countries/views/country_information.dart';
+import 'package:your_ip/features/get_ip/blocs/country_bloc/country_bloc.dart';
+import 'package:your_ip/features/get_ip/repositories/country_services.dart';
+
+class CountriesPage extends StatefulWidget {
+  const CountriesPage({Key? key}) : super(key: key);
+
+  @override
+  State<CountriesPage> createState() => _CountriesPageState();
+}
+
+class _CountriesPageState extends State<CountriesPage> {
+  List<CountriesModel>? countriesModelList;
+  List<CountriesModel>? searchCountriesModelList;
+  bool isSearching = false;
+  TextEditingController searchTextController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: isSearching ? searchTextField() : appBarTitle(),
+        actions: buildAppBarSearch(),
+      ),
+      body: BlocProvider(
+        create: (context) => CountriesBloc()
+          ..add(GetCountries(countriesServices: CountriesServices())),
+        child: BlocBuilder<CountriesBloc, CountriesState>(
+          builder: (context, state) {
+            if (state is CountriesLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is CountriesSuccess) {
+              countriesModelList = state.countriesModel;
+              return ListView.builder(
+                itemCount: searchTextController.text.isEmpty
+                    ? countriesModelList!.length
+                    : searchCountriesModelList!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return countryItem(
+                      searchTextController.text.isEmpty
+                          ? countriesModelList![index]
+                          : searchCountriesModelList![index]);
+                },
+              );
+            } else if (state is CountriesFailure) {
+              return const Center(
+                child: Text('Something went wrong, Please try again'),
+              );
+            } else {
+              return Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Text(
+                      'there is no Countries',
+                      style: TextStyle(
+                        fontSize: 30,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget countryItem(CountriesModel countriesModel) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, CountryInformation.routeName);
+        BlocProvider.of<CountryBloc>(context).add(GetCountryInformation(
+            countryServices: CountryServices(),
+            cc: countriesModel.cc));
+      },
+      child: Card(
+        child: ListTile(
+          title: Text(countriesModel.nativeNameEn),
+          trailing: Image.network(
+            countriesModel.flag,
+            width: 50,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget searchTextField() {
+    return TextField(
+      controller: searchTextController,
+      cursorColor: Colors.grey,
+      decoration: const InputDecoration(
+        hintText: 'Find a Country..',
+        border: InputBorder.none,
+        hintStyle: TextStyle(
+          color: Colors.grey,
+          fontSize: 18,
+        ),
+      ),
+      style: const TextStyle(
+        color: Colors.black,
+        fontSize: 18,
+      ),
+      onChanged: (searchedCountry) {
+        addSearchedCountryToSearchedList(searchedCountry);
+      },
+    );
+  }
+
+  void addSearchedCountryToSearchedList(String searchedCountry) {
+    searchCountriesModelList = countriesModelList!
+        .where((country) =>
+        country.nativeNameEn.toLowerCase().startsWith(searchedCountry))
+        .toList();
+    setState(() {});
+  }
+
+  List<Widget> buildAppBarSearch() {
+    if (isSearching) {
+      return [
+        IconButton(
+          onPressed: () {
+            clearSearch();
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.clear,
+            color: Colors.grey,
+          ),
+        ),
+        IconButton(
+          onPressed: () {
+            Provider.of<ThemeServices>(context, listen: false).toggleMode();
+          },
+          icon: Provider.of<ThemeServices>(context).mode == ThemeMode.dark
+              ? const Icon(Icons.wb_sunny_outlined)
+              : const Icon(Icons.nightlight_round_outlined),
+        ),
+      ];
+    } else {
+      return [
+        IconButton(
+          onPressed: startSearch,
+          icon: const Icon(
+            Icons.search,
+            color: Colors.black,
+          ),
+        ),
+        IconButton(
+          onPressed: () {
+            Provider.of<ThemeServices>(context, listen: false).toggleMode();
+          },
+          icon: Provider.of<ThemeServices>(context).mode == ThemeMode.dark
+              ? const Icon(Icons.wb_sunny_outlined)
+              : const Icon(Icons.nightlight_round_outlined),
+        ),
+      ];
+    }
+  }
+
+  void startSearch() {
+    ModalRoute.of(context)!
+        .addLocalHistoryEntry(LocalHistoryEntry(onRemove: stopSearching));
+    setState(() {
+      isSearching = true;
+    });
+  }
+
+  void stopSearching() {
+    clearSearch();
+    setState(() {
+      isSearching = false;
+    });
+  }
+
+  void clearSearch() {
+    setState(() {
+      searchTextController.clear();
+    });
+  }
+
+  Widget appBarTitle() {
+    return const Text(
+      'All Countries',
+    );
+  }
+}
