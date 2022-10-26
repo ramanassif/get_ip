@@ -8,6 +8,8 @@ import 'package:your_ip/features/countries/repositories/countries_service.dart';
 import 'package:your_ip/features/countries/views/country_information.dart';
 import 'package:your_ip/features/get_ip/blocs/country_bloc/country_bloc.dart';
 import 'package:your_ip/features/get_ip/repositories/country_services.dart';
+import 'package:your_ip/features/search/blocs/search_countries_bloc.dart';
+import 'package:your_ip/features/search/repositories/search_service.dart';
 
 class CountriesPage extends StatefulWidget {
   const CountriesPage({Key? key}) : super(key: key);
@@ -25,55 +27,92 @@ class _CountriesPageState extends State<CountriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: isSearching ? searchTextField() : appBarTitle(),
-        actions: buildAppBarSearch(),
-      ),
-      body: BlocProvider(
-        create: (context) => CountriesBloc()
-          ..add(GetCountries(countriesServices: CountriesServices())),
-        child: BlocBuilder<CountriesBloc, CountriesState>(
-          builder: (context, state) {
-            if (state is CountriesLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (state is CountriesSuccess) {
-              countriesModelList = state.countriesModel;
-              return ListView.builder(
-                itemCount: searchTextController.text.isEmpty
-                    ? countriesModelList!.length
-                    : searchCountriesModelList!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return countryItem(
-                      searchTextController.text.isEmpty
-                          ? countriesModelList![index]
-                          : searchCountriesModelList![index]);
-                },
-              );
-            } else if (state is CountriesFailure) {
-              return const Center(
-                child: Text('Something went wrong, Please try again'),
-              );
-            } else {
-              return Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Text(
-                      'there is no Countries',
-                      style: TextStyle(
-                        fontSize: 30,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }
-          },
+        appBar: AppBar(
+          title: isSearching ? searchTextField() : appBarTitle(),
+          actions: buildAppBarSearch(),
         ),
+        body: !isSearching
+            ? allCountries()
+            : searchResult());
+  }
+
+  Widget allCountries(){
+    return BlocProvider(
+      create: (context) => CountriesBloc()
+        ..add(GetCountries(countriesServices: CountriesServices())),
+      child: BlocBuilder<CountriesBloc, CountriesState>(
+        builder: (context, state) {
+          if (state is CountriesLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is CountriesSuccess) {
+            countriesModelList = state.countriesModel;
+            return ListView.builder(
+              itemCount: countriesModelList!.length,
+              itemBuilder: (BuildContext context, int index) {
+                return countryItem(countriesModelList![index]);
+              },
+            );
+          } else if (state is CountriesFailure) {
+            return const Center(
+              child: Text('Something went wrong, Please try again'),
+            );
+          } else {
+            return Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  Text(
+                    'there is no Countries',
+                    style: TextStyle(
+                      fontSize: 24,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+        },
       ),
     );
+  }
+
+  Widget searchResult() {
+    return BlocBuilder<SearchCountriesBloc, SearchCountriesState>(
+        builder: (context, state) {
+      if (state is SearchCountriesLoading) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      } else if (state is SearchCountriesSuccess) {
+        searchCountriesModelList = state.countriesModel;
+        return ListView.builder(
+          itemCount: searchCountriesModelList!.length,
+          itemBuilder: (BuildContext context, int index) {
+            return countryItem(searchCountriesModelList![index]);
+          },
+        );
+      } else if (state is SearchCountriesFailure) {
+        return const Center(
+          child: Text('Something went wrong, Please try again'),
+        );
+      } else {
+        return Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Text(
+                'Searching..',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            ],
+          ),
+        );
+      }
+    });
   }
 
   Widget countryItem(CountriesModel countriesModel) {
@@ -81,8 +120,7 @@ class _CountriesPageState extends State<CountriesPage> {
       onTap: () {
         Navigator.pushNamed(context, CountryInformation.routeName);
         BlocProvider.of<CountryBloc>(context).add(GetCountryInformation(
-            countryServices: CountryServices(),
-            cc: countriesModel.cc));
+            countryServices: CountryServices(), cc: countriesModel.cc));
       },
       child: Card(
         child: ListTile(
@@ -103,6 +141,7 @@ class _CountriesPageState extends State<CountriesPage> {
       decoration: const InputDecoration(
         hintText: 'Find a Country..',
         border: InputBorder.none,
+        focusedBorder: InputBorder.none,
         hintStyle: TextStyle(
           color: Colors.grey,
           fontSize: 18,
@@ -113,18 +152,21 @@ class _CountriesPageState extends State<CountriesPage> {
         fontSize: 18,
       ),
       onChanged: (searchedCountry) {
-        addSearchedCountryToSearchedList(searchedCountry);
+        BlocProvider.of<SearchCountriesBloc>(context).add(GetSearchCountries(
+            searchCountriesServices:
+                SearchCountriesServices(restOfUrl: searchedCountry)));
+        //addSearchedCountryToSearchedList(searchedCountry);
       },
     );
   }
 
-  void addSearchedCountryToSearchedList(String searchedCountry) {
-    searchCountriesModelList = countriesModelList!
-        .where((country) =>
-        country.nativeNameEn.toLowerCase().startsWith(searchedCountry))
-        .toList();
-    setState(() {});
-  }
+  // void addSearchedCountryToSearchedList(String searchedCountry) {
+  //   searchCountriesModelList = countriesModelList!
+  //       .where((country) =>
+  //           country.nativeNameEn.toLowerCase().startsWith(searchedCountry))
+  //       .toList();
+  //   setState(() {});
+  // }
 
   List<Widget> buildAppBarSearch() {
     if (isSearching) {
