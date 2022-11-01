@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:your_ip/features/countries/models/countries_model.dart';
 import 'package:your_ip/features/search/repositories/search_service.dart';
 
@@ -9,6 +10,15 @@ part 'search_countries_state.dart';
 class SearchCountriesBloc
     extends Bloc<SearchCountriesEvent, SearchCountriesState> {
   SearchCountriesBloc() : super(SearchCountriesInitial());
+
+  @override
+  Stream<Transition<SearchCountriesEvent, SearchCountriesState>>
+      transformEvents(
+          Stream<SearchCountriesEvent> events,
+          TransitionFunction<SearchCountriesEvent, SearchCountriesState>
+              transitionFn) {
+    return events.switchMap(transitionFn);
+  }
 
   @override
   Stream<SearchCountriesState> mapEventToState(
