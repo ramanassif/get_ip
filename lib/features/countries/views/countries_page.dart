@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:your_ip/core/animation/animateroute.dart';
 import 'package:your_ip/core/theme/theme_services.dart';
 import 'package:your_ip/features/countries/blocs/countries_bloc.dart';
 import 'package:your_ip/features/countries/models/countries_model.dart';
@@ -118,7 +119,8 @@ class _CountriesPageState extends State<CountriesPage> {
   Widget countryItem(CountriesModel countriesModel) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, CountryInformation.routeName);
+        Navigator.of(context).push(AnimationEffects(page: const CountryInformation()));
+        //Navigator.pushNamed(context, CountryInformation.routeName);
         BlocProvider.of<CountryBloc>(context).add(GetCountryInformation(
             countryServices: CountryServices(), cc: countriesModel.cc));
       },

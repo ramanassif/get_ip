@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:your_ip/core/animation/animateroute.dart';
 import 'package:your_ip/core/theme/theme_services.dart';
 import 'package:your_ip/features/get_ip/views/get_your_ip_page.dart';
 
@@ -33,7 +34,7 @@ class _ButtonGetYourIPState extends State<ButtonGetYourIP> {
           children: [
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, GetYourIPPage.routeName);
+                Navigator.of(context).push(AnimationEffects(page: const GetYourIPPage()));
               },
               style: ElevatedButton.styleFrom(
                   primary: Colors.red,

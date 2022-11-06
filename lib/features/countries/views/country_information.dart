@@ -74,16 +74,22 @@ class _CountryInformationState extends State<CountryInformation> {
                                     Icons.location_on,
                                     color: Colors.red,
                                   ),
-                                  Text(
-                                    countryModel!.nativeNameEn,
-                                    style: TextStyle(
-                                        color: Provider.of<ThemeServices>(context)
-                                            .mode ==
-                                            ThemeMode.light
-                                            ? Colors.black
-                                            : Colors.white,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 20),
+                                  SizedBox(
+                                    width: 100,
+                                    child: Center(
+                                      child: Text(
+                                        countryModel!.nativeNameEn,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Provider.of<ThemeServices>(context)
+                                                .mode ==
+                                                ThemeMode.light
+                                                ? Colors.black
+                                                : Colors.white,
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 18,),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -101,7 +107,7 @@ class _CountryInformationState extends State<CountryInformation> {
                                     size: const Size.fromRadius(48),
                                     // Image radius
                                     child: Image.network(countryModel!.flag,
-                                        fit: BoxFit.cover),
+                                        fit: BoxFit.contain),
                                   ),
                                 ),
                               ),
@@ -119,6 +125,7 @@ class _CountryInformationState extends State<CountryInformation> {
                           ),
                           Text(
                             countryModel!.countryName,
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Provider.of<ThemeServices>(context).mode ==
                                     ThemeMode.light
