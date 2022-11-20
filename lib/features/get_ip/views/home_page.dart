@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:your_ip/core/theme/theme_services.dart';
 import 'package:your_ip/features/countries/views/countries_page.dart';
-import 'package:your_ip/features/get_ip/views/button_get_ip_page.dart';
+import 'package:your_ip/features/get_ip/views/get_your_ip_page.dart';
 
 class MyHomePage extends StatefulWidget {
   static String routeName = '/home';
@@ -16,13 +16,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String? flagImg;
   String? nativeName;
-  int selectedIndex = 0;
+  int selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {
     List<Widget> pages = [
       const CountriesPage(),
-      const ButtonGetYourIP(),
+      const GetYourIPPage(),
     ];
     return Scaffold(
       body: Center(

@@ -52,12 +52,12 @@ class _IpInformationState extends State<IpInformation> {
           ),
         ),
         Positioned(
-          top: 80,
+          top: MediaQuery.of(context).size.height * 0.13,
           left: 20,
           right: 20,
           child: Container(
             width: MediaQuery.of(context).size.width,
-            height: 400,
+            height:  MediaQuery.of(context).size.height * 0.6,
             decoration: BoxDecoration(
               color: Provider.of<ThemeServices>(context).mode == ThemeMode.light
                   ? Colors.white
@@ -178,6 +178,7 @@ class _IpInformationState extends State<IpInformation> {
                         ),
                         Text(
                           countryModel!.nativeNameAr,
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Provider.of<ThemeServices>(context).mode ==
                                       ThemeMode.light

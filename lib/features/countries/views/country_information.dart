@@ -166,6 +166,7 @@ class _CountryInformationState extends State<CountryInformation> {
                           ),
                           Text(
                             countryModel!.nativeNameAr,
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Provider.of<ThemeServices>(context).mode ==
                                     ThemeMode.light
