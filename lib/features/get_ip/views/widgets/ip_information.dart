@@ -27,7 +27,7 @@ class _IpInformationState extends State<IpInformation> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
-            color: secondPurpleClr,
+            color: fourthColor,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -37,6 +37,7 @@ class _IpInformationState extends State<IpInformation> {
                 child: Text(
                   'Your IP is:',
                   style: TextStyle(
+                    color: Colors.black,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
@@ -45,6 +46,7 @@ class _IpInformationState extends State<IpInformation> {
               Text(
                 widget.ipModelData.ip,
                 style: const TextStyle(
+                  color: Colors.black,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
@@ -59,11 +61,11 @@ class _IpInformationState extends State<IpInformation> {
           child: Container(
             width: MediaQuery.of(context).size.width,
             height:  MediaQuery.of(context).size.height * 0.6,
-            decoration: BoxDecoration(
-              color: Provider.of<ThemeServices>(context).mode == ThemeMode.light
-                  ? Colors.white
-                  : Colors.black,
-              borderRadius: const BorderRadius.only(
+            decoration: const BoxDecoration(
+              // color: Provider.of<ThemeServices>(context).mode == ThemeMode.light
+              //     ? Colors.white
+              //     : Colors.black54,
+              borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(50),
                 bottomRight: Radius.circular(50),
                 topLeft: Radius.circular(50),
@@ -92,16 +94,12 @@ class _IpInformationState extends State<IpInformation> {
                               children: [
                                 const Icon(
                                   Icons.location_on,
-                                  color: thirdClr,
+                                  color: secondClr,
                                 ),
                                 Text(
                                   countryModel!.nativeNameEn,
-                                  style: TextStyle(
-                                      color: Provider.of<ThemeServices>(context)
-                                                  .mode ==
-                                              ThemeMode.light
-                                          ? Colors.black
-                                          : Colors.white,
+                                  style: const TextStyle(
+                                      color: Colors.black,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 20),
                                 ),
@@ -113,7 +111,7 @@ class _IpInformationState extends State<IpInformation> {
                               padding: const EdgeInsets.all(8),
                               // Border width
                               decoration: BoxDecoration(
-                                  color: Colors.grey.withOpacity(0.5),
+                                  //color: Colors.grey.withOpacity(0.5),
                                   borderRadius: BorderRadius.circular(20)),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
@@ -133,17 +131,14 @@ class _IpInformationState extends State<IpInformation> {
                         const Text(
                           'Country Name:',
                           style: TextStyle(
-                              color: thirdClr,
+                              color: secondClr,
                               fontWeight: FontWeight.w700,
                               fontSize: 16),
                         ),
                         Text(
                           countryModel!.countryName,
-                          style: TextStyle(
-                              color: Provider.of<ThemeServices>(context).mode ==
-                                      ThemeMode.light
-                                  ? Colors.black
-                                  : Colors.white,
+                          style: const TextStyle(
+                              color: Colors.black,
                               fontWeight: FontWeight.w700,
                               fontSize: 20),
                         ),
@@ -153,17 +148,14 @@ class _IpInformationState extends State<IpInformation> {
                         const Text(
                           'Capital:',
                           style: TextStyle(
-                              color: thirdClr,
+                              color: secondClr,
                               fontWeight: FontWeight.w700,
                               fontSize: 16),
                         ),
                         Text(
                           countryModel!.capital,
-                          style: TextStyle(
-                              color: Provider.of<ThemeServices>(context).mode ==
-                                      ThemeMode.light
-                                  ? Colors.black
-                                  : Colors.white,
+                          style: const TextStyle(
+                              color: Colors.black,
                               fontWeight: FontWeight.w700,
                               fontSize: 20),
                         ),
@@ -173,18 +165,15 @@ class _IpInformationState extends State<IpInformation> {
                         const Text(
                           'Native Name:',
                           style: TextStyle(
-                              color: thirdClr,
+                              color: secondClr,
                               fontWeight: FontWeight.w700,
                               fontSize: 16),
                         ),
                         Text(
                           countryModel!.nativeNameAr,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Provider.of<ThemeServices>(context).mode ==
-                                      ThemeMode.light
-                                  ? Colors.black
-                                  : Colors.white,
+                          style: const TextStyle(
+                              color: Colors.black,
                               fontWeight: FontWeight.w700,
                               fontSize: 20),
                         ),

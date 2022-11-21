@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-const Color firstPurpleClr = Color(0xFF361d32);
-const Color secondPurpleClr = Color(0xCF543c52);
-const Color thirdClr = Color(0xFFf55951);
-const Color fourthColor = Color(0xFFedd2cb);
-const Color fiveColor = Color(0xFFf1e8e6);
+const Color firstClr = Color(0xFF274c77);
+const Color secondClr = Color(0xCF6096ba);
+const Color thirdClr = Color(0xFFa3cef1);
+const Color fourthColor = Color(0xFFeaf4f4);
+const Color fiveColor = Color(0xFFe7ecef);
 const Color white = Colors.white;
-const primaryClr = firstPurpleClr;
+const primaryClr = firstClr;
 const Color darkGreyClr = Color(0xFF121212);
 const Color darkHeaderClr = Color(0xFF424242);
 

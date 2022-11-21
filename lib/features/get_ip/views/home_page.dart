@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: _onItemTapped,
         fixedColor: fourthColor,
         unselectedItemColor: Colors.grey,
-        backgroundColor: firstPurpleClr,
+        backgroundColor: firstClr,
       ),
     );
   }

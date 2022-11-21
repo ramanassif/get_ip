@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:your_ip/core/storage_services/storage_service.dart';
+import 'package:your_ip/core/theme/theme.dart';
 import 'package:your_ip/core/theme/theme_services.dart';
 import 'package:your_ip/features/get_ip/blocs/country_bloc/country_bloc.dart';
 import 'package:your_ip/features/get_ip/models/country_model.dart';
@@ -21,7 +22,11 @@ class _CountryInformationState extends State<CountryInformation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Information'),
+        backgroundColor: firstClr,
+        title: const Text("Country's information",style: TextStyle(color: fourthColor),),
+        iconTheme: const IconThemeData(
+            color: fourthColor
+        ),
       ),
       body: Stack(
         children: [
@@ -29,7 +34,7 @@ class _CountryInformationState extends State<CountryInformation> {
             width: double.infinity,
             height: double.infinity,
             decoration: const BoxDecoration(
-              color: Colors.grey
+              color: fourthColor,
             ),
           ),
           Positioned(
@@ -39,11 +44,11 @@ class _CountryInformationState extends State<CountryInformation> {
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: 400,
-              decoration: BoxDecoration(
-                color: Provider.of<ThemeServices>(context,listen: false).mode == ThemeMode.light
-                    ? Colors.white
-                    : Colors.black,
-                borderRadius: const BorderRadius.only(
+              decoration: const BoxDecoration(
+                // color: Provider.of<ThemeServices>(context,listen: false).mode == ThemeMode.light
+                //     ? Colors.white
+                //     : Colors.black,
+                borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(50),
                   bottomRight: Radius.circular(50),
                   topLeft: Radius.circular(50),
@@ -72,7 +77,7 @@ class _CountryInformationState extends State<CountryInformation> {
                                 children: [
                                   const Icon(
                                     Icons.location_on,
-                                    color: Colors.red,
+                                    color: secondClr,
                                   ),
                                   SizedBox(
                                     width: 100,
@@ -80,12 +85,8 @@ class _CountryInformationState extends State<CountryInformation> {
                                       child: Text(
                                         countryModel!.nativeNameEn,
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: Provider.of<ThemeServices>(context)
-                                                .mode ==
-                                                ThemeMode.light
-                                                ? Colors.black
-                                                : Colors.white,
+                                        style: const TextStyle(
+                                            color: Colors.black,
                                             fontWeight: FontWeight.w700,
                                             fontSize: 18,),
                                       ),
@@ -99,7 +100,7 @@ class _CountryInformationState extends State<CountryInformation> {
                                 padding: const EdgeInsets.all(8),
                                 // Border width
                                 decoration: BoxDecoration(
-                                    color: Colors.grey.withOpacity(0.5),
+                                    //color: Colors.grey.withOpacity(0.5),
                                     borderRadius: BorderRadius.circular(20)),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20),
@@ -119,18 +120,15 @@ class _CountryInformationState extends State<CountryInformation> {
                           const Text(
                             'Country Name:',
                             style: TextStyle(
-                                color: Colors.red,
+                                color: secondClr,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16),
                           ),
                           Text(
                             countryModel!.countryName,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Provider.of<ThemeServices>(context).mode ==
-                                    ThemeMode.light
-                                    ? Colors.black
-                                    : Colors.white,
+                            style: const TextStyle(
+                                color: Colors.black,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 20),
                           ),
@@ -140,17 +138,14 @@ class _CountryInformationState extends State<CountryInformation> {
                           const Text(
                             'Capital:',
                             style: TextStyle(
-                                color: Colors.red,
+                                color: secondClr,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16),
                           ),
                           Text(
                             countryModel!.capital,
-                            style: TextStyle(
-                                color: Provider.of<ThemeServices>(context).mode ==
-                                    ThemeMode.light
-                                    ? Colors.black
-                                    : Colors.white,
+                            style: const TextStyle(
+                                color: Colors.black,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 20),
                           ),
@@ -160,18 +155,15 @@ class _CountryInformationState extends State<CountryInformation> {
                           const Text(
                             'Native Name:',
                             style: TextStyle(
-                                color: Colors.red,
+                                color: secondClr,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16),
                           ),
                           Text(
                             countryModel!.nativeNameAr,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Provider.of<ThemeServices>(context).mode ==
-                                    ThemeMode.light
-                                    ? Colors.black
-                                    : Colors.white,
+                            style: const TextStyle(
+                                color: Colors.black,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 20),
                           ),

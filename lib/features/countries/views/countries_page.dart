@@ -32,7 +32,7 @@ class _CountriesPageState extends State<CountriesPage> {
         appBar: AppBar(
           title: isSearching ? searchTextField() : appBarTitle(),
           actions: buildAppBarSearch(),
-          backgroundColor: firstPurpleClr,
+          backgroundColor: firstClr,
         ),
         body: !isSearching
             ? allCountries()

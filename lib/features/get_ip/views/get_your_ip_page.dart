@@ -29,8 +29,11 @@ class _GetYourIPPageState extends State<GetYourIPPage> {
           builder: (context) {
             return Scaffold(
               appBar: AppBar(
-                backgroundColor: firstPurpleClr,
+                backgroundColor: firstClr,
                 title: const Text('Get Your IP',style: TextStyle(color: fourthColor),),
+                iconTheme: const IconThemeData(
+                  color: fourthColor
+                ),
                 actions: [
                   IconButton(
                     onPressed: () {
@@ -42,7 +45,7 @@ class _GetYourIPPageState extends State<GetYourIPPage> {
                   ),
                 ],
               ),
-              backgroundColor: secondPurpleClr,
+              backgroundColor: fourthColor,
               body: Stack(
                 children: const [
                   IPContainer(),
