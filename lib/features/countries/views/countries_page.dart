@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:your_ip/core/animation/animateroute.dart';
+import 'package:your_ip/core/basics_widgets/generic_loader.dart';
 import 'package:your_ip/core/theme/theme.dart';
 import 'package:your_ip/core/theme/theme_services.dart';
 import 'package:your_ip/features/countries/blocs/countries_bloc.dart';
@@ -31,6 +32,7 @@ class _CountriesPageState extends State<CountriesPage> {
     return Scaffold(
       appBar: AppBar(
         title: isSearching ? searchTextField() : appBarTitle(),
+        iconTheme: const IconThemeData(color: fourthColor),
         actions: buildAppBarSearch(),
         backgroundColor: firstClr,
       ),
@@ -49,7 +51,7 @@ class _CountriesPageState extends State<CountriesPage> {
         builder: (context, state) {
           if (state is CountriesLoading) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: GenericLoader(),
             );
           } else if (state is CountriesSuccess) {
             countriesModelList = state.countriesModel;
@@ -88,7 +90,7 @@ class _CountriesPageState extends State<CountriesPage> {
         builder: (context, state) {
       if (state is SearchCountriesLoading) {
         return const Center(
-          child: CircularProgressIndicator(),
+          child: GenericLoader(),
         );
       } else if (state is SearchCountriesSuccess) {
         searchCountriesModelList = state.countriesModel;
@@ -148,7 +150,7 @@ class _CountriesPageState extends State<CountriesPage> {
   Widget searchTextField() {
     return TextField(
       controller: searchTextController,
-      cursorColor: Colors.grey,
+      cursorColor: Colors.grey.withOpacity(0.4),
       decoration: const InputDecoration(
         hintText: 'Find a Country..',
         border: InputBorder.none,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:your_ip/core/basics_widgets/flag_container.dart';
+import 'package:your_ip/core/basics_widgets/generic_loader.dart';
 import 'package:your_ip/core/storage_services/storage_service.dart';
 import 'package:your_ip/core/theme/theme.dart';
 import 'package:your_ip/core/theme/theme_services.dart';
@@ -57,7 +58,7 @@ class _CountryInformationState extends State<CountryInformation> {
                 builder: (context, state) {
                   if (state is CountryLoading) {
                     return const Center(
-                      child: CircularProgressIndicator(),
+                      child: GenericLoader(),
                     );
                   } else if (state is CountrySuccess) {
                     countryModel = state.countryModel;

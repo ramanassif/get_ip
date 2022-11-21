@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:your_ip/core/basics_widgets/generic_loader.dart';
 import 'package:your_ip/core/storage_services/storage_service.dart';
 import 'package:your_ip/features/get_ip/blocs/country_bloc/country_bloc.dart';
 import 'package:your_ip/features/get_ip/blocs/ip_bloc/ip_bloc.dart';
@@ -34,7 +35,7 @@ class _IPContainerState extends State<IPContainer> {
         builder: (context, state) {
           if (state is IPLoading) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: GenericLoader(),
             );
           } else if (state is IPSuccess) {
             return IpInformation(
