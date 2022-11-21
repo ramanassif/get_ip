@@ -29,17 +29,19 @@ class _CountriesPageState extends State<CountriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: isSearching ? searchTextField() : appBarTitle(),
-          actions: buildAppBarSearch(),
-          backgroundColor: firstClr,
-        ),
-        body: !isSearching
-            ? allCountries()
-            : searchResult());
+      appBar: AppBar(
+        title: isSearching ? searchTextField() : appBarTitle(),
+        actions: buildAppBarSearch(),
+        backgroundColor: firstClr,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 24,right: 24,top: 24),
+        child: !isSearching ? allCountries() : searchResult(),
+      ),
+    );
   }
 
-  Widget allCountries(){
+  Widget allCountries() {
     return BlocProvider(
       create: (context) => CountriesBloc()
         ..add(GetCountries(countriesServices: CountriesServices())),
@@ -121,7 +123,8 @@ class _CountriesPageState extends State<CountriesPage> {
   Widget countryItem(CountriesModel countriesModel) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(AnimationEffects(page: const CountryInformation()));
+        Navigator.of(context)
+            .push(AnimationEffects(page: const CountryInformation()));
         //Navigator.pushNamed(context, CountryInformation.routeName);
         BlocProvider.of<CountryBloc>(context).add(GetCountryInformation(
             countryServices: CountryServices(), cc: countriesModel.cc));
@@ -129,7 +132,10 @@ class _CountriesPageState extends State<CountriesPage> {
       child: Card(
         color: fourthColor,
         child: ListTile(
-          title: Text(countriesModel.nativeNameEn,style: const TextStyle(color: Colors.black),),
+          title: Text(
+            countriesModel.nativeNameEn,
+            style: const TextStyle(color: Colors.black),
+          ),
           trailing: Image.network(
             countriesModel.flag,
             width: 50,
@@ -191,8 +197,14 @@ class _CountriesPageState extends State<CountriesPage> {
             Provider.of<ThemeServices>(context, listen: false).toggleMode();
           },
           icon: Provider.of<ThemeServices>(context).mode == ThemeMode.dark
-              ? const Icon(Icons.wb_sunny_outlined,color: fourthColor,)
-              : const Icon(Icons.nightlight_round_outlined,color: fourthColor,),
+              ? const Icon(
+                  Icons.wb_sunny_outlined,
+                  color: fourthColor,
+                )
+              : const Icon(
+                  Icons.nightlight_round_outlined,
+                  color: fourthColor,
+                ),
         ),
       ];
     } else {
@@ -209,8 +221,14 @@ class _CountriesPageState extends State<CountriesPage> {
             Provider.of<ThemeServices>(context, listen: false).toggleMode();
           },
           icon: Provider.of<ThemeServices>(context).mode == ThemeMode.dark
-              ? const Icon(Icons.wb_sunny_outlined,color: fourthColor,)
-              : const Icon(Icons.nightlight_round_outlined,color: fourthColor,),
+              ? const Icon(
+                  Icons.wb_sunny_outlined,
+                  color: fourthColor,
+                )
+              : const Icon(
+                  Icons.nightlight_round_outlined,
+                  color: fourthColor,
+                ),
         ),
       ];
     }
@@ -239,7 +257,8 @@ class _CountriesPageState extends State<CountriesPage> {
 
   Widget appBarTitle() {
     return const Text(
-      'All Countries',style: TextStyle(color: fourthColor),
+      'All Countries',
+      style: TextStyle(color: fourthColor),
     );
   }
 }
