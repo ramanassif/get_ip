@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:your_ip/core/theme/theme.dart';
 import 'package:your_ip/core/theme/theme_services.dart';
 import 'package:your_ip/features/get_ip/blocs/country_bloc/country_bloc.dart';
 import 'package:your_ip/features/get_ip/blocs/ip_bloc/ip_bloc.dart';
@@ -28,18 +29,20 @@ class _GetYourIPPageState extends State<GetYourIPPage> {
           builder: (context) {
             return Scaffold(
               appBar: AppBar(
-                title: const Text('Get Your IP'),
+                backgroundColor: firstPurpleClr,
+                title: const Text('Get Your IP',style: TextStyle(color: fourthColor),),
                 actions: [
                   IconButton(
                     onPressed: () {
                       Provider.of<ThemeServices>(context, listen: false).toggleMode();
                     },
                     icon: Provider.of<ThemeServices>(context).mode == ThemeMode.dark
-                        ? const Icon(Icons.wb_sunny_outlined)
-                        : const Icon(Icons.nightlight_round_outlined),
+                        ? const Icon(Icons.wb_sunny_outlined,color: fourthColor,)
+                        : const Icon(Icons.nightlight_round_outlined,color: fourthColor,),
                   ),
                 ],
               ),
+              backgroundColor: secondPurpleClr,
               body: Stack(
                 children: const [
                   IPContainer(),

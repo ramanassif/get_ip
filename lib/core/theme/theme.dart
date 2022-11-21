@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-const Color bluishClr = Color(0xFF4e5ae8);
-const Color orangeClr = Color(0xCFFF8746);
-const Color pinkClr = Color(0xFFff4667);
+const Color firstPurpleClr = Color(0xFF361d32);
+const Color secondPurpleClr = Color(0xCF543c52);
+const Color thirdClr = Color(0xFFf55951);
+const Color fourthColor = Color(0xFFedd2cb);
+const Color fiveColor = Color(0xFFf1e8e6);
 const Color white = Colors.white;
-const primaryClr = bluishClr;
+const primaryClr = firstPurpleClr;
 const Color darkGreyClr = Color(0xFF121212);
 const Color darkHeaderClr = Color(0xFF424242);
 

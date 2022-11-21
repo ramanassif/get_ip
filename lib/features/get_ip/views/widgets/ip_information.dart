@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:your_ip/core/storage_services/storage_service.dart';
+import 'package:your_ip/core/theme/theme.dart';
 import 'package:your_ip/core/theme/theme_services.dart';
 import 'package:your_ip/features/get_ip/blocs/country_bloc/country_bloc.dart';
 import 'package:your_ip/features/get_ip/models/country_model.dart';
@@ -26,7 +27,7 @@ class _IpInformationState extends State<IpInformation> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
-            color: Colors.red,
+            color: secondPurpleClr,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -91,7 +92,7 @@ class _IpInformationState extends State<IpInformation> {
                               children: [
                                 const Icon(
                                   Icons.location_on,
-                                  color: Colors.red,
+                                  color: thirdClr,
                                 ),
                                 Text(
                                   countryModel!.nativeNameEn,
@@ -132,7 +133,7 @@ class _IpInformationState extends State<IpInformation> {
                         const Text(
                           'Country Name:',
                           style: TextStyle(
-                              color: Colors.red,
+                              color: thirdClr,
                               fontWeight: FontWeight.w700,
                               fontSize: 16),
                         ),
@@ -152,7 +153,7 @@ class _IpInformationState extends State<IpInformation> {
                         const Text(
                           'Capital:',
                           style: TextStyle(
-                              color: Colors.red,
+                              color: thirdClr,
                               fontWeight: FontWeight.w700,
                               fontSize: 16),
                         ),
@@ -172,7 +173,7 @@ class _IpInformationState extends State<IpInformation> {
                         const Text(
                           'Native Name:',
                           style: TextStyle(
-                              color: Colors.red,
+                              color: thirdClr,
                               fontWeight: FontWeight.w700,
                               fontSize: 16),
                         ),

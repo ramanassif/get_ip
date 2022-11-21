@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:your_ip/core/animation/animateroute.dart';
+import 'package:your_ip/core/theme/theme.dart';
 import 'package:your_ip/core/theme/theme_services.dart';
 import 'package:your_ip/features/countries/blocs/countries_bloc.dart';
 import 'package:your_ip/features/countries/models/countries_model.dart';
@@ -31,6 +32,7 @@ class _CountriesPageState extends State<CountriesPage> {
         appBar: AppBar(
           title: isSearching ? searchTextField() : appBarTitle(),
           actions: buildAppBarSearch(),
+          backgroundColor: firstPurpleClr,
         ),
         body: !isSearching
             ? allCountries()
@@ -125,8 +127,9 @@ class _CountriesPageState extends State<CountriesPage> {
             countryServices: CountryServices(), cc: countriesModel.cc));
       },
       child: Card(
+        color: fourthColor,
         child: ListTile(
-          title: Text(countriesModel.nativeNameEn),
+          title: Text(countriesModel.nativeNameEn,style: const TextStyle(color: Colors.black),),
           trailing: Image.network(
             countriesModel.flag,
             width: 50,
@@ -145,12 +148,12 @@ class _CountriesPageState extends State<CountriesPage> {
         border: InputBorder.none,
         focusedBorder: InputBorder.none,
         hintStyle: TextStyle(
-          color: Colors.grey,
+          color: fiveColor,
           fontSize: 18,
         ),
       ),
       style: const TextStyle(
-        color: Colors.black,
+        color: Colors.white,
         fontSize: 18,
       ),
       onChanged: (searchedCountry) {
@@ -180,7 +183,7 @@ class _CountriesPageState extends State<CountriesPage> {
           },
           icon: const Icon(
             Icons.clear,
-            color: Colors.grey,
+            color: fourthColor,
           ),
         ),
         IconButton(
@@ -188,8 +191,8 @@ class _CountriesPageState extends State<CountriesPage> {
             Provider.of<ThemeServices>(context, listen: false).toggleMode();
           },
           icon: Provider.of<ThemeServices>(context).mode == ThemeMode.dark
-              ? const Icon(Icons.wb_sunny_outlined)
-              : const Icon(Icons.nightlight_round_outlined),
+              ? const Icon(Icons.wb_sunny_outlined,color: fourthColor,)
+              : const Icon(Icons.nightlight_round_outlined,color: fourthColor,),
         ),
       ];
     } else {
@@ -198,7 +201,7 @@ class _CountriesPageState extends State<CountriesPage> {
           onPressed: startSearch,
           icon: const Icon(
             Icons.search,
-            color: Colors.black,
+            color: fourthColor,
           ),
         ),
         IconButton(
@@ -206,8 +209,8 @@ class _CountriesPageState extends State<CountriesPage> {
             Provider.of<ThemeServices>(context, listen: false).toggleMode();
           },
           icon: Provider.of<ThemeServices>(context).mode == ThemeMode.dark
-              ? const Icon(Icons.wb_sunny_outlined)
-              : const Icon(Icons.nightlight_round_outlined),
+              ? const Icon(Icons.wb_sunny_outlined,color: fourthColor,)
+              : const Icon(Icons.nightlight_round_outlined,color: fourthColor,),
         ),
       ];
     }
@@ -236,7 +239,7 @@ class _CountriesPageState extends State<CountriesPage> {
 
   Widget appBarTitle() {
     return const Text(
-      'All Countries',
+      'All Countries',style: TextStyle(color: fourthColor),
     );
   }
 }
