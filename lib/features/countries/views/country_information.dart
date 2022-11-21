@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:your_ip/core/basics_widgets/flag_container.dart';
 import 'package:your_ip/core/storage_services/storage_service.dart';
 import 'package:your_ip/core/theme/theme.dart';
 import 'package:your_ip/core/theme/theme_services.dart';
@@ -45,9 +46,6 @@ class _CountryInformationState extends State<CountryInformation> {
               width: MediaQuery.of(context).size.width,
               height: 400,
               decoration: const BoxDecoration(
-                // color: Provider.of<ThemeServices>(context,listen: false).mode == ThemeMode.light
-                //     ? Colors.white
-                //     : Colors.black,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(50),
                   bottomRight: Radius.circular(50),
@@ -94,24 +92,7 @@ class _CountryInformationState extends State<CountryInformation> {
                                   ),
                                 ],
                               ),
-                              Container(
-                                width: 175,
-                                height: 150,
-                                padding: const EdgeInsets.all(8),
-                                // Border width
-                                decoration: BoxDecoration(
-                                    //color: Colors.grey.withOpacity(0.5),
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: SizedBox.fromSize(
-                                    size: const Size.fromRadius(48),
-                                    // Image radius
-                                    child: Image.network(countryModel!.flag,
-                                        fit: BoxFit.contain),
-                                  ),
-                                ),
-                              ),
+                              FlagAnimation(flag: countryModel!.flag),
                             ],
                           ),
                           const SizedBox(
