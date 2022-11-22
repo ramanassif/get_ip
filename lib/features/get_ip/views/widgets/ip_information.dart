@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
+import 'package:your_ip/core/basics_widgets/error_message.dart';
 import 'package:your_ip/core/basics_widgets/flag_container.dart';
 import 'package:your_ip/core/basics_widgets/generic_loader.dart';
 import 'package:your_ip/core/storage_services/storage_service.dart';
 import 'package:your_ip/core/theme/theme.dart';
-import 'package:your_ip/core/theme/theme_services.dart';
 import 'package:your_ip/features/get_ip/blocs/country_bloc/country_bloc.dart';
 import 'package:your_ip/features/get_ip/models/country_model.dart';
 import 'package:your_ip/features/get_ip/models/ip_model.dart';
 
 class IpInformation extends StatefulWidget {
-  IpInformation({Key? key, required this.ipModelData}) : super(key: key);
-  IpModel ipModelData;
+  const IpInformation({Key? key, required this.ipModelData}) : super(key: key);
+  final IpModel ipModelData;
 
   @override
   State<IpInformation> createState() => _IpInformationState();
@@ -64,9 +63,6 @@ class _IpInformationState extends State<IpInformation> {
             width: MediaQuery.of(context).size.width,
             height:  MediaQuery.of(context).size.height * 0.6,
             decoration: const BoxDecoration(
-              // color: Provider.of<ThemeServices>(context).mode == ThemeMode.light
-              //     ? Colors.white
-              //     : Colors.black54,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(50),
                 bottomRight: Radius.circular(50),
@@ -107,7 +103,6 @@ class _IpInformationState extends State<IpInformation> {
                                 ),
                               ],
                             ),
-                            ///FlagAnimation
                             FlagAnimation(flag: countryModel!.flag),
                           ],
                         ),
@@ -167,23 +162,11 @@ class _IpInformationState extends State<IpInformation> {
                     ),
                   );
                 } else if (state is CountryFailure) {
-                  return const Center(
-                    child: Text('Something went wrong, Please try again'),
+                  return const ErrorMessage(
+                    message: 'Something went wrong, Please try again',
                   );
                 } else {
-                  return Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: const [
-                        Text(
-                          'there is no Country Information',
-                          style: TextStyle(
-                            fontSize: 30,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
+                  return const GenericLoader();
                 }
               },
             ),
@@ -192,4 +175,5 @@ class _IpInformationState extends State<IpInformation> {
       ],
     );
   }
+
 }

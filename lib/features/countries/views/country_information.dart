@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
+import 'package:your_ip/core/theme/theme.dart';
+import 'package:your_ip/core/basics_widgets/error_message.dart';
 import 'package:your_ip/core/basics_widgets/flag_container.dart';
 import 'package:your_ip/core/basics_widgets/generic_loader.dart';
 import 'package:your_ip/core/storage_services/storage_service.dart';
-import 'package:your_ip/core/theme/theme.dart';
-import 'package:your_ip/core/theme/theme_services.dart';
 import 'package:your_ip/features/get_ip/blocs/country_bloc/country_bloc.dart';
 import 'package:your_ip/features/get_ip/models/country_model.dart';
 
 class CountryInformation extends StatefulWidget {
   static String routeName = '/country_information';
+
   const CountryInformation({Key? key}) : super(key: key);
 
   @override
@@ -25,10 +25,11 @@ class _CountryInformationState extends State<CountryInformation> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: firstClr,
-        title: const Text("Country's information",style: TextStyle(color: fourthColor),),
-        iconTheme: const IconThemeData(
-            color: fourthColor
+        title: const Text(
+          "Country's information",
+          style: TextStyle(color: fourthColor),
         ),
+        iconTheme: const IconThemeData(color: fourthColor),
       ),
       body: Stack(
         children: [
@@ -85,9 +86,10 @@ class _CountryInformationState extends State<CountryInformation> {
                                         countryModel!.nativeNameEn,
                                         textAlign: TextAlign.center,
                                         style: const TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 18,),
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 18,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -153,19 +155,16 @@ class _CountryInformationState extends State<CountryInformation> {
                       ),
                     );
                   } else if (state is CountryFailure) {
-                    return const Center(
-                      child: Text('Something went wrong, Please try again'),
+                    return const ErrorMessage(
+                      message: 'Something went wrong, Please try again',
                     );
                   } else {
                     return Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: const [
-                          Text(
-                            'there is no Country Information',
-                            style: TextStyle(
-                              fontSize: 30,
-                            ),
+                          ErrorMessage(
+                            message: 'Refresh Failed',
                           ),
                         ],
                       ),

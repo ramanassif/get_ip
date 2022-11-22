@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:your_ip/core/basics_widgets/error_message.dart';
 import 'package:your_ip/core/basics_widgets/generic_loader.dart';
-import 'package:your_ip/core/storage_services/storage_service.dart';
 import 'package:your_ip/features/get_ip/blocs/country_bloc/country_bloc.dart';
 import 'package:your_ip/features/get_ip/blocs/ip_bloc/ip_bloc.dart';
 import 'package:your_ip/features/get_ip/models/country_model.dart';
@@ -42,20 +42,15 @@ class _IPContainerState extends State<IPContainer> {
               ipModelData: ipModelData!,
             );
           } else if (state is IPFailure) {
-            return const Center(
-              child: Text('Something went wrong, Please try again'),
+            return const ErrorMessage(
+              message: 'Something went wrong, Please try again',
             );
           } else {
             return Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: const [
-                  Text(
-                    'there is no ip',
-                    style: TextStyle(
-                      fontSize: 30,
-                    ),
-                  ),
+                  GenericLoader(),
                 ],
               ),
             );
@@ -64,4 +59,5 @@ class _IPContainerState extends State<IPContainer> {
       ),
     );
   }
+
 }

@@ -10,7 +10,6 @@ import 'package:your_ip/features/get_ip/views/widgets/container_content.dart';
 
 class GetYourIPPage extends StatefulWidget {
   static String routeName = '/get_ip';
-
   const GetYourIPPage({Key? key}) : super(key: key);
 
   @override

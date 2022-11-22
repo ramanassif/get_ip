@@ -10,15 +10,15 @@ import 'package:your_ip/features/get_ip/views/home_page.dart';
 import 'package:your_ip/features/search/blocs/search_countries_bloc.dart';
 
 void main() {
-  runApp(MultiBlocProvider(providers: [
-    BlocProvider(create: (_) => CountryBloc()),
-    BlocProvider(create: (_) => SearchCountriesBloc()),
-  ], child: const MyApp())
-      // BlocProvider(
-      //   create: (_) => CountryBloc(),
-      //   child: const MyApp(),
-      // ),
-      );
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => CountryBloc()),
+        BlocProvider(create: (_) => SearchCountriesBloc()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -40,7 +40,6 @@ class MyApp extends StatelessWidget {
             GetYourIPPage.routeName: (context) => const GetYourIPPage(),
             CountryInformation.routeName: (context) =>
                 const CountryInformation(),
-            //CountriesPage.routeName: (context) => const CountriesPage(),
           },
         ),
       ),

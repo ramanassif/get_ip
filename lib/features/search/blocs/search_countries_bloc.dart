@@ -1,10 +1,9 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:your_ip/features/countries/models/countries_model.dart';
 import 'package:your_ip/features/search/repositories/search_service.dart';
 
 part 'search_countries_event.dart';
-
 part 'search_countries_state.dart';
 
 class SearchCountriesBloc
