@@ -33,16 +33,16 @@ class _GetYourIPPageState extends State<GetYourIPPage> {
                 iconTheme: const IconThemeData(
                   color: fourthColor
                 ),
-                actions: [
-                  IconButton(
-                    onPressed: () {
-                      Provider.of<ThemeServices>(context, listen: false).toggleMode();
-                    },
-                    icon: Provider.of<ThemeServices>(context).mode == ThemeMode.dark
-                        ? const Icon(Icons.wb_sunny_outlined,color: fourthColor,)
-                        : const Icon(Icons.nightlight_round_outlined,color: fourthColor,),
-                  ),
-                ],
+                // actions: [
+                //   IconButton(
+                //     onPressed: () {
+                //       Provider.of<ThemeServices>(context, listen: false).toggleMode();
+                //     },
+                //     icon: Provider.of<ThemeServices>(context).mode == ThemeMode.dark
+                //         ? const Icon(Icons.wb_sunny_outlined,color: fourthColor,)
+                //         : const Icon(Icons.nightlight_round_outlined,color: fourthColor,),
+                //   ),
+                // ],
               ),
               backgroundColor: fourthColor,
               body: Stack(

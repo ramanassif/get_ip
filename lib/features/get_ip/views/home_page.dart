@@ -1,3 +1,4 @@
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:your_ip/core/theme/theme.dart';
 import 'package:your_ip/features/countries/views/countries_page.dart';
@@ -27,35 +28,63 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: pages.elementAt(selectedIndex), //New
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
+      bottomNavigationBar: BottomNavyBar(
+        containerHeight: MediaQuery.of(context).size.height * 0.08,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        backgroundColor:firstClr,
+        selectedIndex: selectedIndex,
+        showElevation: true,
+        itemCornerRadius: 18,
+        curve: Curves.easeIn,
+        onItemSelected: (index) => setState(() => selectedIndex = index),
+        items: <BottomNavyBarItem>[
+          BottomNavyBarItem(
+            icon: const Icon(
               Icons.flag,
             ),
-            label: "Countries",
+            title: const Text('Countries'),
+            activeColor: fourthColor,
+            textAlign: TextAlign.center,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
+          BottomNavyBarItem(
+            icon: const Icon(
               Icons.location_on,
             ),
-            label: "Your IP",
+            title: const Text('Your IP'),
+            activeColor: fourthColor,
+            textAlign: TextAlign.center,
           ),
         ],
-        currentIndex: selectedIndex,
-        onTap: _onItemTapped,
-        fixedColor: fourthColor,
-        unselectedItemColor: Colors.grey,
-        backgroundColor: firstClr,
       ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: const [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(
+      //         Icons.flag,
+      //       ),
+      //       label: "Countries",
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(
+      //         Icons.location_on,
+      //       ),
+      //       label: "Your IP",
+      //     ),
+      //   ],
+      //   currentIndex: selectedIndex,
+      //   onTap: _onItemTapped,
+      //   fixedColor: fourthColor,
+      //   unselectedItemColor: Colors.grey,
+      //   backgroundColor: firstClr,
+      // ),
     );
   }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-    print(selectedIndex);
-  }
+  //
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     selectedIndex = index;
+  //   });
+  //   print(selectedIndex);
+  // }
 
 }

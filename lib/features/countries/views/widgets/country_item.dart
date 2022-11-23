@@ -27,7 +27,7 @@ class _CountryItemState extends State<CountryItem> {
             countryServices: CountryServices(), cc: widget.countriesModel.cc));
       },
       child: Card(
-        color: fourthColor,
+        color: secondClr.withOpacity(0.3),
         child: ListTile(
           title: Text(
             widget.countriesModel.nativeNameEn,

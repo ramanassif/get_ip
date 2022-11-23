@@ -26,6 +26,7 @@ class _CountriesPageState extends State<CountriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: fourthColor,
       appBar: AppBar(
         title: isSearching ? searchTextField() : const AppBarTitle(),
         iconTheme: const IconThemeData(color: fourthColor),
@@ -82,20 +83,20 @@ class _CountriesPageState extends State<CountriesPage> {
             color: fourthColor,
           ),
         ),
-        IconButton(
-          onPressed: () {
-            Provider.of<ThemeServices>(context, listen: false).toggleMode();
-          },
-          icon: Provider.of<ThemeServices>(context).mode == ThemeMode.dark
-              ? const Icon(
-                  Icons.wb_sunny_outlined,
-                  color: fourthColor,
-                )
-              : const Icon(
-                  Icons.nightlight_round_outlined,
-                  color: fourthColor,
-                ),
-        ),
+        // IconButton(
+        //   onPressed: () {
+        //     Provider.of<ThemeServices>(context, listen: false).toggleMode();
+        //   },
+        //   icon: Provider.of<ThemeServices>(context).mode == ThemeMode.dark
+        //       ? const Icon(
+        //           Icons.wb_sunny_outlined,
+        //           color: fourthColor,
+        //         )
+        //       : const Icon(
+        //           Icons.nightlight_round_outlined,
+        //           color: fourthColor,
+        //         ),
+        // ),
       ];
     } else {
       return [
@@ -106,20 +107,20 @@ class _CountriesPageState extends State<CountriesPage> {
             color: fourthColor,
           ),
         ),
-        IconButton(
-          onPressed: () {
-            Provider.of<ThemeServices>(context, listen: false).toggleMode();
-          },
-          icon: Provider.of<ThemeServices>(context).mode == ThemeMode.dark
-              ? const Icon(
-                  Icons.wb_sunny_outlined,
-                  color: fourthColor,
-                )
-              : const Icon(
-                  Icons.nightlight_round_outlined,
-                  color: fourthColor,
-                ),
-        ),
+        // IconButton(
+        //   onPressed: () {
+        //     Provider.of<ThemeServices>(context, listen: false).toggleMode();
+        //   },
+        //   icon: Provider.of<ThemeServices>(context).mode == ThemeMode.dark
+        //       ? const Icon(
+        //           Icons.wb_sunny_outlined,
+        //           color: fourthColor,
+        //         )
+        //       : const Icon(
+        //           Icons.nightlight_round_outlined,
+        //           color: fourthColor,
+        //         ),
+        // ),
       ];
     }
   }

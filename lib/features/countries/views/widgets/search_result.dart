@@ -33,19 +33,7 @@ class SearchResult extends StatelessWidget {
           child: Text('Something went wrong, Please try again'),
         );
       } else {
-        return Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              Text(
-                'Searching..',
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              ),
-            ],
-          ),
-        );
+        return const GenericLoader();
       }
     });
   }
